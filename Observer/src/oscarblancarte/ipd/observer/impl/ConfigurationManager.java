@@ -2,6 +2,7 @@ package oscarblancarte.ipd.observer.impl;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.text.DecimalFormatSymbols;
 
 /**
  * @author Oscar Javier Blancarte Iturralde
@@ -11,6 +12,7 @@ public class ConfigurationManager extends AbstractObservable {
 
     private SimpleDateFormat defaultDateFormat;
     private NumberFormat moneyFormat;
+    private DecimalFormatSymbols decimalFormat;
 
     private static ConfigurationManager configurationManager;
 
@@ -46,4 +48,14 @@ public class ConfigurationManager extends AbstractObservable {
         this.moneyFormat = moneyFormat;
         notifyAllObservers("moneyFormat", this);
     }
+    
+    public DecimalFormatSymbols getSimbolMoney() {
+        return decimalFormat;
+    }
+    
+    public void setSimbolMoney(DecimalFormatSymbols decimalFormat) {
+        this.decimalFormat = decimalFormat;
+        notifyAllObservers("simbolFormatMoney", this);
+    }
+    
 }
