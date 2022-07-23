@@ -35,7 +35,7 @@ public class ObserverMain {
         conf.addObserver(moneySymbolObserver);
         System.out.println("");
         
-        System.out.println("Ingrese número 1 o 2:\n"
+        System.out.println("Ingrese número 1 o 2 para seleccionar su moneda:\n"
                 + "1. Dolar \n"
                 + "2. Euro");
         Scanner yourVariable = new Scanner(System.in);
