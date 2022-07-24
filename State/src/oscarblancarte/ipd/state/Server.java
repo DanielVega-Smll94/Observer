@@ -2,6 +2,7 @@ package oscarblancarte.ipd.state;
 
 import oscarblancarte.ipd.state.states.AbstractServerState;
 import oscarblancarte.ipd.state.states.StartingServerState;
+import oscarblancarte.ipd.state.states.StopSafeServerState;
 import oscarblancarte.ipd.state.states.StopServerState;
 
 public class Server {
@@ -36,6 +37,9 @@ public class Server {
                 && state instanceof StopServerState) {
             System.out.println("Server is starting, "
                     + "cannot change state");
+            return;
+        }else if(this.state instanceof StopSafeServerState){
+            System.out.println("El servidor se está apagando");
             return;
         }
         this.state = state;

@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import oscarblancarte.ipd.state.Server;
 import oscarblancarte.ipd.state.states.AbstractServerState;
 import oscarblancarte.ipd.state.states.StartingServerState;
+import oscarblancarte.ipd.state.states.StopSafeServerState;
 import oscarblancarte.ipd.state.states.StopServerState;
 
 public class ServerPanel extends javax.swing.JPanel {
@@ -59,6 +60,7 @@ public class ServerPanel extends javax.swing.JPanel {
         jTextArea1 = new javax.swing.JTextArea();
         btnSendMessage = new javax.swing.JButton();
         btnStart = new javax.swing.JButton();
+        btnStopSafe = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -89,6 +91,13 @@ public class ServerPanel extends javax.swing.JPanel {
             }
         });
 
+        btnStopSafe.setText("stopSafe");
+        btnStopSafe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStopSafesendMessageEvent(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,12 +105,13 @@ public class ServerPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnStart, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1))
-                    .addComponent(btnSendMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSendMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnStopSafe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -112,11 +122,15 @@ public class ServerPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSendMessage)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnStopSafe)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
+
+        btnStopSafe.getAccessibleContext().setAccessibleName("stopSafe");
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendMessageEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageEvent
@@ -127,6 +141,7 @@ public class ServerPanel extends javax.swing.JPanel {
     private void startAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startAction
         // TODO add your handling code here:
         AbstractServerState state = server.getState();
+        System.out.println("AQUI" + state);
         if (state instanceof StopServerState) {
             btnStart.setText("Stop");
             server.setState(new StartingServerState(server));
@@ -141,10 +156,21 @@ public class ServerPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_startAction
 
+    private void btnStopSafesendMessageEvent(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopSafesendMessageEvent
+        // TODO add your handling code here:
+        AbstractServerState state = server.getState();
+        System.out.println("AQUI2" + state);
+        if (state instanceof StopSafeServerState){
+            System.out.println("Revisión");
+            //server.setState(new StopSa );
+        }
+    }//GEN-LAST:event_btnStopSafesendMessageEvent
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSendMessage;
     private javax.swing.JButton btnStart;
+    private javax.swing.JButton btnStopSafe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<pagos>
+    <nombrebanco>Banco Bolivariano</nombrebanco>
+    <tarjeta>Credito</tarjeta>
+    <monto>2000</monto>
+    <cliente>Daniel</cliente>
+    <estado>Activo</estado>
+</pagos>

@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import oscarblancarte.ipd.templetemethod.impl.DrugstoreFileProcess;
 import oscarblancarte.ipd.templetemethod.impl.GroceryFileProcess;
+import oscarblancarte.ipd.templetemethod.impl.PaymentNew;
 
 /**
  * @author Oscar Javier Blancarte Iturralde
@@ -14,9 +15,10 @@ import oscarblancarte.ipd.templetemethod.impl.GroceryFileProcess;
 public class TempleteMethodMain extends TimerTask {
     
     private static final String[] PATHS = 
-        new String[]{"C:/files/drugstore", "C:/files/grocery"};
-    private static final String LOG_DIR = "C:/files/logs";
-    private static final String PROCESS_DIR = "C:/files/process";
+            
+        new String[]{"src/files/drugstore", "src/files/grocery","src/files/payments"};
+    private static final String LOG_DIR = "src/files/logs";
+    private static final String PROCESS_DIR = "src/files/process";
 
     public static void main(String[] args) {
         new TempleteMethodMain().start();
@@ -65,5 +67,25 @@ public class TempleteMethodMain extends TimerTask {
                 System.err.println(e.getMessage());
             }
         }
+        System.out.println(PATHS.length);
+        System.out.println(PATHS[0]);
+        System.out.println(PATHS[1]);
+
+        f = new File(PATHS[2]);
+        if(!f.exists()){
+            throw new RuntimeException("El path '"+PATHS[2]+"' no existe");
+        }
+        System.out.println("> Read Path " + PATHS[2]);
+        File[] payment = f.listFiles();
+        for (File file : payment) {
+            try {
+                System.out.println("> File found > " + file.getName());
+                new PaymentNew(file, LOG_DIR, PROCESS_DIR).execute();
+                System.out.println("Processed file > " + file.getName());
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        
     }
 }

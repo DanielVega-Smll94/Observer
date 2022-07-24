@@ -60,4 +60,35 @@ public class MessageProcess {
             this.sendThread = null;
         }
     }
+    
+    public void stopSafe(){
+        System.out.println("revisar");
+        this.sendThread = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while (true) {
+                        Thread.sleep(1000 * 10);
+                        if (!messageQueue.isEmpty()) {
+                            String message = messageQueue.poll();
+                            System.out.println("Message process > "
+                                    + message + "(" + messageQueue.size()
+                                    + ")");
+                        }
+                    }
+                } catch (InterruptedException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        });
+
+        this.sendThread.stop();
+        this.sendThread = null;
+        System.out.println("Servidor Apagado");
+
+       // if(this.sendThread != null){
+        //    this.sendThread.stop();
+      //      this.sendThread = null;
+    //        }
+        
+    }
 }
